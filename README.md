@@ -1,6 +1,7 @@
 # Recoding : Tracing the Origins of Generative Art
 
 Recoding is a short workshop exploring the logic of early generative art through the reinterpretation of a single historical artwork: [Segrid](https://recodeproject.com/artworks/v2n3-segrid) (1973) by John Roy.
+
 It will be held at Palo Alto in Barcelona (Spain) the 10th of July 2026 during ["MAGBa3 — Origens"](https://magba.art/magba3/) exhibition. 
 
 https://magba.art/magba3/en/esdeveniments/recoding-tracing-the-origins-of-generative-art/index.html
