@@ -20,8 +20,8 @@ https://magba.art/magba3/en/esdeveniments/recoding-tracing-the-origins-of-genera
 
 
 ## Sketches
-* [Sketch basic](https://editor.p5js.org/v3ga/collections/7uvBUnc0-)
-* [Sketch with random parameters and UI](https://editor.p5js.org/v3ga/collections/7uvBUnc0-)
+* [Sketch basic](https://editor.p5js.org/v3ga/sketches/lD0uUIE_g)
+* [Sketch with random parameters and UI](https://editor.p5js.org/v3ga/sketches/GEq3U8fdO)
 
 ## Tools
 * [Golan Levin / p5.plotSvg](https://github.com/golanlevin/p5.plotSvg/)<br />*p5.js library for exporting SVG files tailored for pen plotting.*

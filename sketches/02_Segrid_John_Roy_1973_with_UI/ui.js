@@ -271,11 +271,6 @@ class UICheckbox extends UIElement
 {
     static id_switch = 0;
 
-    static()
-    {
-
-    }
-
     constructor(opts={})
     {
         super("div", opts);
