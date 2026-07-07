@@ -19,6 +19,9 @@ Selected iterations will also be plotted as physical drawings using modern & vin
 https://magba.art/magba3/en/esdeveniments/recoding-tracing-the-origins-of-generative-art/index.html
 
 
+## Workflow
+
+
 ## Sketches
 * [Sketch basic](https://editor.p5js.org/v3ga/sketches/lD0uUIE_g)
 * [Sketch with random parameters and UI](https://editor.p5js.org/v3ga/sketches/GEq3U8fdO)

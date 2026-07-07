@@ -144,7 +144,6 @@ function setupRandomGenerator()
   random_dec = PRNG.Alea(params.seed);
 }
 
-
 // --------------------------------
 function drawGrid()
 {
@@ -177,4 +176,14 @@ function mmToPx(mm)
 function paperRatio()
 {
   return paperFormatCM[0] / paperFormatCM[1]; 
+}
+
+// --------------------------------
+function keyPressed()
+{
+  if (key == 'e')
+  {
+    bDoExportSvg = true;
+    redraw();
+  }
 }

@@ -1,0 +1,154 @@
+html, body
+{
+  margin:   0;
+  padding:  0;
+  height:   100%;
+}
+
+body
+{
+  font-family:      Helvetica;
+  box-sizing:       border-box;
+  padding:          1em;
+  height:           100vh;
+  display:          flex;
+  flex-direction:   column;
+}
+
+#app
+{
+  flex:       1;
+  display:    flex;
+  gap:        1em;
+  min-height: 0;
+}
+
+.column
+{
+  flex:             1;
+  min-width:        0;
+  min-height:       0;
+  display:          flex;
+  flex-direction:   column;
+  gap:              0.75em;
+}
+
+.controls
+{
+  display:      flex;
+  gap:          0.75em;
+  align-items:  center;
+  flex-wrap:    wrap;
+}
+
+.btn-small
+{
+  padding:    0.2em 0.6em;
+  font-size:  0.85em;
+}
+
+.tabs
+{
+  display:          flex;
+  gap:              0.5em;
+  background:       rgba(255, 255, 255, 0.85);
+  padding:          0.3em;
+  border-radius:    6px;
+  box-shadow:       0 0 4px rgba(0, 0, 0, 0.15);
+}
+
+.tabs button.active
+{
+  font-weight:      bold;
+  text-decoration:  underline;
+}
+
+/* ---------------------------------------------------------- */
+/* SVG previews (source + transformed)                          */
+/* ---------------------------------------------------------- */
+.preview
+{
+  flex:             1;
+  min-height:       0;
+  border:           1px solid #ccc;
+  overflow:         auto;
+  align-items:      center;
+  justify-content:  center;
+}
+
+.preview svg
+{
+  width:  100%;
+  height: 100%;
+}
+
+/* Drop zone : doubles as the source SVG preview, its placeholder
+   text sits as the background until a file is dropped. */
+.drop-zone
+{
+  cursor: pointer;
+}
+
+.drop-zone.is-empty
+{
+  border:         3px dashed #999;
+  border-radius:  8px;
+  text-align:     center;
+  color:          #666;
+  padding:        1.5em;
+  box-sizing:     border-box;
+  transition:     border-color .15s, color .15s;
+}
+
+.drop-zone.is-empty.drag-over
+{
+  border-color: #333;
+  color:        #333;
+}
+
+/* ---------------------------------------------------------- */
+/* Result view : SVG / HPGL panes stacked, tabs floating          */
+/* ---------------------------------------------------------- */
+#result-view
+{
+  position:   relative;
+  flex:       1;
+  min-height: 0;
+  display:    flex;
+}
+
+#result-view .pane
+{
+  position: absolute;
+  inset:    0;
+  margin:   0;
+}
+
+#result-view .tabs
+{
+  position: absolute;
+  right:    0.75em;
+  bottom:   0.75em;
+}
+
+.pane
+{
+  display: none;
+}
+
+.pane.active
+{
+  display: flex;
+}
+
+#hpgl-preview
+{
+  padding:          0.75em;
+  box-sizing:       border-box;
+  font-family:      monospace;
+  font-size:        0.8em;
+  white-space:      pre-wrap;
+  word-break:       break-all;
+  align-items:      flex-start;
+  justify-content:  flex-start;
+}
