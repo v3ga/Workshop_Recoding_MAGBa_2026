@@ -19,48 +19,10 @@ Selected iterations will also be plotted as physical drawings using modern & vin
 https://magba.art/magba3/en/esdeveniments/recoding-tracing-the-origins-of-generative-art/index.html
 
 
-## Workflow
-
-
 ## Sketches
-* [Template]()
-* [Sketch basic](https://editor.p5js.org/v3ga/sketches/lD0uUIE_g)
+* [Template](https://editor.p5js.org/v3ga/sketches/lD0uUIE_g)
 * [Sketch with random parameters and UI](https://editor.p5js.org/v3ga/sketches/GEq3U8fdO)
 
-## Quick reference 
-The files ```utils.js``` and ```sketch.js``` include some useful functions that can be used during the workshop.
-
-#### Random functions
-```js
-// random number between 0 and 1
-// random_dec is initalized in the setup() with a custom PRNG function 
-let rnd = random_dec()
-// random number between a and b (exclusive)
-let rnd = random_between(a,b)
-// random integer between a (inclusive) and b (inclusive)
-let rnd = random_int(a,b)
-// random boolean
-let is = random_bool()
-// random value in an array of items
-let rnd_item = random_choice(a)
-```
-#### Geometry
-```js
-// Scales an array of p5.Vector from its centroid
-let verticesScaled = scaleVertices(vertices, s=1.0)
-// Computes oriented hatches for an array of vertices (p5.Vector)
-// Returns [ [A,B], [A,B], ... ]
-let lines = getHatches(vertices, angle, step);
-```
-#### Computation
-```js
-// Computes the position and dimension of the grid according to the user margin
-let [xGrid,yGrid,dimGrid] = getGridInformation()
-// Converts millimeters to pixels (using paper format)
-let px = mmToPx(mm)
-// Paper ratio
-let ratio = paperRatio()
-```
 
 ## Workflow
 ### The easy way
@@ -111,6 +73,40 @@ python ./server.py
 ```
 If everything went fine, you should be able to open ```http://127.0.0.1:8080``` on your browser and navigate into the examples.
 
+## Quick reference 
+The files ```utils.js``` and ```sketch.js``` include some useful functions that can be used during the workshop.
+
+#### Random functions
+```js
+// random number between 0 and 1
+// random_dec is initalized in the setup() with a custom PRNG function 
+let rnd = random_dec()
+// random number between a and b (exclusive)
+let rnd = random_between(a,b)
+// random integer between a (inclusive) and b (inclusive)
+let rnd = random_int(a,b)
+// random boolean
+let is = random_bool()
+// random value in an array of items
+let rnd_item = random_choice(a)
+```
+#### Geometry
+```js
+// Scales an array of p5.Vector from its centroid
+let verticesScaled = scaleVertices(vertices, s=1.0)
+// Computes oriented hatches for an array of vertices (p5.Vector)
+// Returns [ [A,B], [A,B], ... ]
+let lines = getHatches(vertices, angle, step);
+```
+#### Computation
+```js
+// Computes the position and dimension of the grid according to the user margin
+let [xGrid,yGrid,dimGrid] = getGridInformation()
+// Converts millimeters to pixels (using paper format)
+let px = mmToPx(mm)
+// Paper ratio
+let ratio = paperRatio()
+```
 
 ## Libs & tools
 * [Golan Levin / p5.plotSvg](https://github.com/golanlevin/p5.plotSvg/)<br />*p5.js library for exporting SVG files tailored for pen plotting.*
