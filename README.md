@@ -92,6 +92,8 @@ let rnd_item = random_choice(a)
 ```
 #### Geometry
 ```js
+// Get a vertex in the grid at (i,j)
+let v = getVertex(i,j)
 // Scales an array of p5.Vector from its centroid
 let verticesScaled = scaleVertices(vertices, s=1.0)
 // Computes oriented hatches for an array of vertices (p5.Vector)

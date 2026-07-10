@@ -4,8 +4,8 @@
 // --------------------------------
 
 let filename          = 'MAGBa3_Recoding_Segrid_John_Roy';
-let bDrawGrid         = true;
-let bDrawPatterns     = false;
+let bDrawGrid         = false;
+let bDrawPatterns     = true;
 let bDoExportSvg      = false; 
 
 // --------------------------------
@@ -83,7 +83,7 @@ function draw()
         // Coordinates of (i,j) cell
         let x = xGrid + i*step;
         let y = yGrid + j*step;
-        
+
         // Density
         let dst = max(abs(i - cx), abs(j - cy));
         let n   = map(dst / dMax,0,params.nbLinesMin,params.nbLinesMax,1);
@@ -189,6 +189,15 @@ function getGridInformation()
   let xGrid       = (width-dimGrid)/2;
   let yGrid       = (height-dimGrid)/2;
   return [xGrid,yGrid,dimGrid];
+}
+
+// --------------------------------
+function getVertex(i,j)
+{
+  let [xGrid,yGrid,dimGrid] =  getGridInformation(); // TODO : should store this somewhere
+  let r           = params.res;
+  let step        = dimGrid/r;
+  return createVector(xGrid + i*step, yGrid + j*step);
 }
 
 // --------------------------------
