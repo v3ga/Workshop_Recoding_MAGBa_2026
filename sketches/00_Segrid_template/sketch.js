@@ -4,8 +4,8 @@
 // --------------------------------
 
 let filename          = 'MAGBa3_Recoding_Segrid_John_Roy';
-let bDrawGrid         = false;
-let bDrawPatterns     = true;
+let bDrawGrid         = true;
+let bDrawPatterns     = false;
 let bDoExportSvg      = false; 
 
 // --------------------------------
@@ -13,7 +13,11 @@ let palette           = {'paperColor':'#000', 'strokeColor':'#FFF'};
 
 // --------------------------------
 // Paper format
+// Available : [15,15] [25,25] [21,29.7]
 let paperFormatCM      = [25,25]; // cm
+
+// --------------------------------
+let canvasW            = 600; // pixels
 
 // --------------------------------
 // Default values
@@ -28,43 +32,10 @@ let params =
 }
 
 // --------------------------------
-// Function that will participants will work in
-// (x,y) : position of the cell
-// d     : width/height of the cell
-// (i,j) : coordinates of the cell
-// n     : density
-function drawPattern(x,y,d,i,j,n)
-{
-  let d2  = d/2;
-  let gap = d2 * 1/params.nbLinesHalfCell;
-  
-  push();
-  translate(x+d2, y+d2);
-
-  let offset = d/(2*n)/2;
-  for (let a=0;a<4;a++)
-  {
-    push();
-    rotate(a*PI/2)
-    let y = -d2+gap; 
-    for (let k=0;k<n;k++)
-    {
-      line(-d2,y,0,y)
-      y += gap;
-    }
-    pop();
-    
-  }
-  
-  pop();
-}
-
-
-// --------------------------------
 function setup() 
 {
   // Create canvas
-  createCanvas(800, floor(800/paperRatio()));
+  createCanvas(canvasW, floor(canvasW/paperRatio()));
   setSvgResolutionDPCM(Math.floor(width/paperFormatCM[0]));  
 
   // no loop, just draw once
@@ -89,21 +60,20 @@ function draw()
   if (bDrawGrid)
     drawGrid();
   
+  // Export SVG
   if (bDoExportSvg)
     beginRecordSvg(this, `${filename}.svg`);
 
+  // Patterns
   if (bDrawPatterns)
   {
-    // Patterns
-    let margin = params.margin;
-    let r     = params.res;
-    let mw    = margin*width; 
-    let w     = width-2*mw;
-    let mh    = 0.5*(height-w); 
-    let d     = (width-2*mw)/r;
-    let cx    = (r - 1) / 2;
-    let cy    = (r - 1) / 2;
-    let dMax  = floor(r / 2);
+    let [xGrid,yGrid,dimGrid] =  getGridInformation();
+
+    let r           = params.res;
+    let step        = dimGrid/r;
+    let cx          = (r - 1) / 2;
+    let cy          = (r - 1) / 2;
+    let dMax        = floor(r / 2);
     
     strokeWeight( mmToPx(params.sw) );
     for (let j=0; j<r; j++)
@@ -111,20 +81,20 @@ function draw()
       for (let i=0; i<r; i++)
       {
         // Coordinates of (i,j) cell
-        let x = mw+i*d;
-        let y = mh+j*d;
+        let x = xGrid + i*step;
+        let y = yGrid + j*step;
         
         // Density
         let dst = max(abs(i - cx), abs(j - cy));
-        let n   = floor( map(dst / dMax,0,1, params.nbLinesMax, params.nbLinesMin) );
+        let n   = map(dst / dMax,0,params.nbLinesMin,params.nbLinesMax,1);
 
         // Draw pattern
-        drawPattern(x,y,d,i,j,n);              
+        drawPatternSegrid(x,y,step,i,j,n);              
       }
     }
-
-
   }
+
+  // Export SVG end
   if (bDoExportSvg)
   {
     endRecordSvg();
@@ -132,6 +102,49 @@ function draw()
   }
 
 }
+
+// --------------------------------
+// Function that will participants will work in
+// (x,y) : position of the cell
+// d     : width/height of the cell
+// (i,j) : coordinates of the cell
+// n     : density
+function drawPattern(x,y,d,i,j,n)
+{
+  
+}
+
+// --------------------------------
+// Function that will participants will work in
+// (x,y) : position of the cell
+// d     : width/height of the cell
+// (i,j) : coordinates of the cell
+// n     : density
+function drawPatternSegrid(x,y,d,i,j,n)
+{
+  let d2  = d/2;
+  let gap = d2 * 1/params.nbLinesHalfCell;
+  
+  push();
+  translate(x+d2, y+d2);
+
+  for (let a=0;a<4;a++)
+  {
+    push();
+    rotate(a*PI/2)
+    let y = -d2+gap; 
+    for (let k=0;k<n;k++)
+    {
+      line(-d2,y,0,y)
+      y += gap;
+    }
+    pop();
+    
+  }
+  
+  pop();
+}
+
 
 // --------------------------------
 function setupRandomGenerator()
@@ -144,26 +157,38 @@ function setupRandomGenerator()
   random_dec = PRNG.Alea(params.seed);
 }
 
+
 // --------------------------------
 function drawGrid()
 {
   push();
-  stroke(255,100,0,120);
+  stroke(255,120);
   strokeWeight(1);
 
-  let m = params.margin*width; 
   let r = params.res;
+  let [xGrid,yGrid,dimGrid] =  getGridInformation();
   for (let i=0; i<=r; i++)
   {
-     let x = map(i,0,r,m,width-m);
-     line(x,m,x,height-m);
+     let x = map(i,0,r,xGrid,xGrid+dimGrid);
+     line(x,yGrid,x,yGrid+dimGrid);
   }  
   for (let j=0; j<=r; j++)
   {
-     let y = map(j,0,r,m,height-m);
-     line(m,y,width-m,y);
+     let y = map(j,0,r,yGrid,yGrid+dimGrid);
+     line(xGrid,y,xGrid+dimGrid,y);
   }  
   pop();
+}
+
+// --------------------------------
+function getGridInformation()
+{
+  let margin      = params.margin;
+  let m           = min(width,height)*margin;
+  let dimGrid     = min(width,height)-2*m;
+  let xGrid       = (width-dimGrid)/2;
+  let yGrid       = (height-dimGrid)/2;
+  return [xGrid,yGrid,dimGrid];
 }
 
 // --------------------------------
@@ -176,14 +201,4 @@ function mmToPx(mm)
 function paperRatio()
 {
   return paperFormatCM[0] / paperFormatCM[1]; 
-}
-
-// --------------------------------
-function keyPressed()
-{
-  if (key == 'e')
-  {
-    bDoExportSvg = true;
-    redraw();
-  }
 }

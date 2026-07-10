@@ -114,7 +114,7 @@ function draw()
 
       // Density
       let dst = max(abs(i - cx), abs(j - cy));
-      let n   = map(dst / dMax,0,params.nbLinesMin,params.nbLinesMax,1);
+      let n   = floor( map(dst / dMax,0,1, params.nbLinesMax, params.nbLinesMin) );
 
       // Draw pattern
       drawPattern(x,y,d,i,j,n);
